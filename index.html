@@ -769,7 +769,6 @@ function holdHitTest(x,y){
 function handleHoldSteadyClick(x,y){
   if(phase !== 'active' || ch().type !== 'holdsteady') return;
   const now = performance.now();
-  if(now < (run.holdShotCooldownUntil || 0)) return;
   if(!run.holdFront || !run.holdNoShoot) initHoldSteadyRun(now);
   const elapsed = Math.max(0, now-startTime);
   run.shotsFired++;
@@ -791,7 +790,6 @@ function handleHoldSteadyClick(x,y){
   }
   run.holdScore++;
   run.holdGoodFlashUntil = now + 210;
-  run.holdShotCooldownUntil = now + 150;
   recordValidHit({kind:'plate', plate:hit.front, zone:'Plate'}, elapsed, x, y);
   run.validHits = run.holdScore;
   playBeep(760,0.055,0.055);
